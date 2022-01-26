@@ -1,2 +1,2 @@
 # JS-algorithms
-Practicing algorithms
+Practicing algorithms and testing them with Benchmark.js

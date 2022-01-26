@@ -1,9 +1,9 @@
 const Benchmark = require('benchmark');
-const { binarySearch, linearSearch, isEven } = require('./algorithms');
+const { binarySearch, linearSearch, isEven, bubbleSort } = require('./algorithms');
 const nums = [];
 
-for(let i = 0; i <= 100000; i++) {
-    nums.push(i);
+for(let i = 0; i <= 1000; i++) {
+    nums.push(randomNum(1000));
 }
 
 const suite = new Benchmark.Suite;
@@ -17,6 +17,11 @@ suite
         // benchmark binary search
         binarySearch(nums, nums[nums.length - 1], 0, nums.length - 1);
     })
+    .add('bubble sort', function() {
+        // benchmark bubble sort
+        const tempArr = [...nums];
+        bubbleSort(tempArr);
+    })
     .on('complete', function() {
         // loop over and print each result
         this.forEach(result => 
@@ -24,3 +29,8 @@ suite
         );
     })
     .run();
+
+
+function randomNum(limit) {
+    return Math.floor(Math.random() * limit) + 1;
+}

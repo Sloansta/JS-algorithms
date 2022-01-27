@@ -27,12 +27,12 @@ const binarySearch = (arr, num, left, right) => {
 //console.log(binarySearch(data, 23, 0, data.length - 1));
 
 // O(1) 
-const isEven = (num) => {
+/*const isEven = (num) => {
     if(num % 2 === 0)
         return true;
     else 
         return false;
-};
+};*/
 
 // SORTING 
 
@@ -59,13 +59,37 @@ const bubbleSort = (arr) => {
     }
 
     return arr;
-}
+};
+
+// quick sort
+const quickSort = (arr) => {
+    // checking to see if array length is too small
+    if(arr.length <= 1)
+        return arr;
+
+    // use firest index as the pivot point
+    const pivot = arr[0];
+    const left = [];
+    const right = [];
+
+    // start at 1 to avoid pivot
+    for(let i = 1; i < arr.length; i++) {
+        // push into different arrays based on value compared to pivot
+        if(arr[i] < pivot)
+            left.push(arr[i]);
+        else 
+            right.push(arr[i]);
+    }
+
+    // merge arrays and pivot together
+    return quickSort(left).concat(pivot, quickSort(right));
+};
 
 //console.log(isEven(80));
 
 module.exports = {
     binarySearch,
     linearSearch,
-    isEven,
-    bubbleSort
+    bubbleSort,
+    quickSort
 };

@@ -85,11 +85,62 @@ const quickSort = (arr) => {
     return quickSort(left).concat(pivot, quickSort(right));
 };
 
+// function for checking to see what number was most duplicated
+const mostDuplicates = (arr) => {
+    let mostValue;
+    let mostCount = 0;
+
+    for(let i = 0; i < arr.length; i++) {
+        let counter = 0;
+
+        // nested loop
+        for(let j = 0; j < arr.length; j++) {
+            if(arr[i] === arr[j])
+                counter++;
+        }
+
+        if(counter > mostCount) {
+            mostCount = counter;
+            mostValue = arr[i];
+        }
+    }
+
+    return `${mostValue} appeared ${mostCount} times.`;
+};
+
+
+// more optimized version of the mostDuplicates function this makes the function go from originally being O(n2) to O(n)
+const optimizedDuplicates = (arr) => {
+    const map = {};
+
+    for(let i = 0; i < arr.length; i++) {
+        const value = arr[i];
+        if(map[value] === undefined)
+            map[value] = 1;
+        else 
+            map[value]++;
+    }
+
+    let mostValue;
+    let mostCount = 0;
+
+    for(const value in map) {
+        if(map[value] > mostCount) {
+            mostCount = map[value];
+            mostValue = value;
+        }
+    }
+
+    return `${mostValue} appeared ${mostCount} times`;
+};
+
 //console.log(isEven(80));
 
 module.exports = {
     binarySearch,
     linearSearch,
     bubbleSort,
-    quickSort
+    quickSort,
+    mostDuplicates,
+    optimizedDuplicates
 };

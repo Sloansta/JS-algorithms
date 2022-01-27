@@ -1,5 +1,5 @@
 const Benchmark = require('benchmark');
-const { binarySearch, linearSearch, bubbleSort, quickSort } = require('./algorithms');
+const { binarySearch, linearSearch, bubbleSort, quickSort, mostDuplicates, optimizedDuplicates } = require('./algorithms');
 const nums = [];
 
 for(let i = 0; i <= 1000; i++) {
@@ -33,6 +33,14 @@ suite
         tempArr.sort((a, b) => {
             return a - b;
         });
+    })
+    .add('most duplicated', function() {
+        const tempArr = [...nums];
+        mostDuplicates(tempArr);
+    })
+    .add('optimized most duplicated', function() {
+        const tempArr = [...nums];
+        optimizedDuplicates(tempArr);
     })
     .on('complete', function() {
         // loop over and print each result
